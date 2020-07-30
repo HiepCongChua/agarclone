@@ -5,7 +5,7 @@ const context = canvas.getContext("2d")
 const player = {}
 canvas.width = wWidth
 canvas.height = wHeight
-
+let orbs = []
 $(window).load(() => {
   $("#loginModal").modal("show")
 })

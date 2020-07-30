@@ -1,18 +1,29 @@
-function init() {
-  draw()
-}
+
 player.locX = Math.floor(500 * Math.random() + 100)
 player.locY = Math.floor(500 * Math.random() + 100)
 function draw() {
   // draw cricle
-  context.clearRect(0, 0, canvas.width, canvas.height) // xoa nhung khung hinh cu
+  // xoa nhung khung hinh cu
+  // reset the translation back to default
+  context.setTransform(1, 0, 0, 1, 0, 0)
+  context.clearRect(0, 0, canvas.width, canvas.height)
+  const camX = -player.locX + canvas.width / 2
+  const camY = -player.locY + canvas.height / 2
+  context.translate(camX, camY)
   context.beginPath()
   context.fillStyle = "rgb(255,0,0)"
   context.arc(player.locX, player.locY, 10, 0, Math.PI * 2)
+  context.arc(200, 200, 10, 0, Math.PI * 2)
   context.fill()
   context.lineWidth = 3
   context.strokeStyle = "rgb(0,255,0)"
   context.stroke()
+  orbs.forEach((orb) => {
+    context.beginPath()
+    context.fillStyle = orb.color
+    context.arc(orb.locX, orb.locY, orb.radius, 0, Math.PI * 2)
+    context.fill()
+  })
   requestAnimationFrame(draw) // ban chat la goi de quy ve nhieu khung hinh (30 khung/s)
 }
 
